@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Add a new book</title>
+    </head>
+    <body>
+        <header>
+            <a href="index.html">
+                <img src="img/logo.png" width="150" height="150" alt="BookSelf logo">
+            </a>
+            <nav>
+                <ul>
+                <li><a href="index.html">My Books</a></li>
+                <li><a href="new-book.html">Add a new book</a></li>
+                <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+    <main>
+        <form>
+            <label for="book_cover">Upload the book cover:</label>
+            <input type="file" id="book_cover" name="cover" accept="image/*" required>
+            <br>
+            <br>
+            <label for="book_title">Book title:</label>
+            <input type="text" id="book_title" name="title" required>
+            <br>
+            <br>
+            <label for="genre" required>Genre:</label>
+            <select id="genre" name="genre" required>
+                <option value="romance">Romance</option>
+                <option value="contemporary">Contemporary Fiction</option>
+                <option value="brazilian">Brazilian Contemporary Literature</option>
+                <option value="classic">Classic Literature</option>
+                <option value="historical">Historical Fiction</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="science">Science Fiction</option>
+                <option value="dystopian">Dystopian Fiction</option>
+                <option value="horror">Horror</option>
+                <option value="mystery">Mystery</option>
+                <option value="thriller">Thriller</option>
+                <option value="youngAdult">Young Adult</option>
+                <option value="poetry">Poetry</option>
+                <option value="shortStories">Short Stories</option>
+                <option value="shortStories">Short Stories</option>
+                <option value="essays">Essays</option>
+                <option value="memoir">Memoir</option>
+                <option value="biography">Biography</option>
+                <option value="autobiography">Autobiography</option>
+                <option value="nonfiction">Nonfiction</option>
+                <option value="latin">Latin American Literature</option>
+                <option value="Brazilian Literature">Brazilian Literature</option>
+            </select>
+            <br>
+            <br>
+            <label>Author:</label>
+            <input type="text" id="book_author" name="author" required>
+            <br>
+            <br>
+            <label for="pages">Number of pages:</label>
+            <input type="number" id="pages" name="pages" min="1" required>
+            <br>
+            <p>Status:</p>
+            <input type="radio" id="read" name="status" value="read" required>
+            <label for="status">Read</label>
+            <input type="radio" id="reading" name="status" value="reading">
+            <label for="status">Reading</label>
+            <input type="radio" id="unread" name="status" value="unread">
+            <label for="status">Unread</label>
+            <br>
+            <br>
+            <label for="review">Your thoughts about the book</label>
+            <br>
+            <textarea id="review" name="review" rows="6" cols="36"></textarea>
+            <br>
+            <br>
+            <label for="quotes">Your favorite quotes</label>
+            <br>
+            <textarea id="quotes" name="quotes" rows="6" cols="36"></textarea>
+            <br>
+            <br>
+            <input type="submit" value="Save book">
+        </form>
+    </main>
+        <footer>
+            <p>BookSelf is the place to keep all your beloved books. Enjoy reading with us.</p>
+            <a href="index.html">My Books</a>
+            <a href="new-book.html">Add a new book</a>
+        </footer>
+    </body>
+</html>
