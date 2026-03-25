@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="style.css" rel="stylesheet" />
+  <script src="app.js" defer></script>
+
+  <title>Add a new book</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="menu-container">
+        <nav>
+          <a href="index.html">
+            <img src="img/logo.png" class="logo" alt="BookSelf logo" />
+          </a>
+          <div class="menu-div">
+            <ul class="menu">
+              <li class="menu-item">
+                <a class="animated-link" href="index.html">My bookshelf</a>
+              </li>
+              <li class="menu-item">
+                <a class="animated-link active" href="add-new-book-.html">Add a new book</a>
+              </li>
+              <li class="menu-item">
+                <a class="animated-link" href="about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="form">
+        <div class="dashed-line">
+          <p class="form-title">Add a new a book:</p>
+        </div>
+        <form id="book-form">
+          <br />
+          <label for="book-cover">Upload the book cover:</label>
+          <input type="file" id="book-cover" name="cover" accept="image/*" required />
+          <br />
+          <br />
+          <label for="book-title">Book title:</label>
+          <input type="text" id="book-title" name="title" required />
+          <br />
+          <br />
+          <label for="book-genre">Genre:</label>
+          <select id="book-genre" name="genre" required>
+            <option value="romance">Romance</option>
+            <option value="contemporary">Contemporary Fiction</option>
+            <option value="brazilian-contemporary">Brazilian Contemporary Literature</option>
+            <option value="classic">Classic Literature</option>
+            <option value="historical">Historical Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="science">Science Fiction</option>
+            <option value="dystopian">Dystopian Fiction</option>
+            <option value="horror">Horror</option>
+            <option value="mystery">Mystery</option>
+            <option value="thriller">Thriller</option>
+            <option value="young-adult">Young Adult</option>
+            <option value="poetry">Poetry</option>
+            <option value="short-stories">Short Stories</option>
+            <option value="essays">Essays</option>
+            <option value="memoir">Memoir</option>
+            <option value="biography">Biography</option>
+            <option value="autobiography">Autobiography</option>
+            <option value="nonfiction">Nonfiction</option>
+            <option value="latin">Latin American Literature</option>
+            <option value="brazilian-literature">Brazilian Literature</option>
+          </select>
+          <br />
+          <br />
+          <label for="book-author">Author:</label>
+          <input type="text" id="book-author" name="author" required />
+          <br />
+          <br />
+          <label for="book-pages">Number of pages:</label>
+          <input type="number" id="book-pages" name="pages" min="1" required />
+          <br />
+          <br />
+          <p class="status">Status:</p>
+          <br />
+          <input type="radio" id="read" name="status" value="read" required />
+          <label for="read">Read</label>
+          <input type="radio" id="reading" name="status" value="reading" />
+          <label for="reading">Reading</label>
+          <input type="radio" id="unread" name="status" value="unread" />
+          <label for="unread">Unread</label>
+          <br />
+          <br />
+          <label for="book-review">Your thoughts about the book</label>
+          <br />
+          <textarea id="book-review" name="review" rows="6" cols="36"></textarea>
+          <br />
+          <br />
+          <label for="book-quotes">Your favorite quotes</label>
+          <br />
+          <textarea id="book-quotes" name="quotes" rows="6" cols="36"></textarea>
+          <br />
+          <br />
+          <input type="submit" value="Save book" />
+        </form>
+      </div>
+    </main>
+    <footer>
+      <p>
+        <span class="bold">BookSelf</span> is the place to keep all your beloved books. Enjoy reading
+        with us ❤︎
+      </p>
+      <a class="footer-link" href="index.html">My Books </a>
+      <span class="division"> | </span>
+      <a class="footer-link" href="add-new-book.html">Add a new book</a>
+    </footer>
+  </div>
+</body>
+
+</html>

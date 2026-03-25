@@ -1,0 +1,318 @@
+
+html {
+    font-size: 16px;
+
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #B02A37;
+
+    --background: #A7B8C4;
+    --background-rgb: 167, 184, 196;
+
+    --background-dark: #8FA4B2;
+
+    --background-ligth: #BFCBD3;
+    --background-ligth-rgb: 191, 203, 211;
+
+
+    --surface: #FAF7F2;
+    --surface-card: #F6F1EB;
+
+    --text-primary: #4A4542;
+
+    /* text size variables*/
+    --text-base: 1rem;        /* 16px 1rem */
+    --text-sm: 0.875rem;      /* 14px 0.875 */
+    --text-md: 1.1rem;       /* 20px 1.1*/
+    --text-lg: 1.5rem;        /* 24px 1.5*/
+    --text-xl: 2rem;          /* 32px */
+    --text-xxl: 2.5rem;       /* 40px */
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url(fonts/Manrope-VariableFont_wght.woff2) format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url(fonts/CormorantGaramond-VariableFont_wght.woff2) format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant';
+}
+h1, h2, h3, h4, h5, p {
+    color:var(--text-primary);
+}
+p  { font-size: var(--text-sm); }
+h1 { font-size: var(--text-xxl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+h4 { font-size: var(--text-md); }
+h5 { font-size: var(--text-sm); }
+
+
+body {
+    font-family: 'Manrope', Roboto, Helvetica, Arial;
+    background: repeating-linear-gradient(
+    to right,            /* direção das listras */
+        rgba(var(--background-rgb), 0.6) 0px,
+        rgba(var(--background-rgb), 0.6) 8px,
+        rgba(var(--background-ligth-rgb), 0.6) 8px,
+        rgba(var(--background-ligth-rgb), 0.6) 16px
+    );
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+
+nav {
+    display: grid;
+    grid-template-columns: auto 1fr;   
+    align-items: stretch;
+    padding-left: 1rem;
+}
+
+nav a {
+    display: inline-block;
+    position: relative;
+    align-items: center;
+}
+
+.menu-div {
+    border-left: 2px dashed rgba(var(--background-ligth-rgb), 0.5);
+    padding-left: 1.5rem;
+    display: grid;
+    align-content: center;  
+}
+
+.menu-container {
+    background-color: var(--surface-card);
+    display: grid;
+    margin-top: clamp(16px, 4vw, 48px);
+    margin-inline: clamp(16px, 3vw, 64px);
+    border-radius: 50px;    
+    box-shadow: 3px 3px 14px 2px var(--background-dark);    
+}
+
+.menu {
+    display: grid;
+    grid-auto-flow: column; 
+    justify-content: left;     
+    gap: 24px;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.menu-item {
+    font-size: 1.2rem;
+    display: inline-block;
+    position: relative;
+}
+
+/*creating how to put a red line when the mouse is on top of an item on the menu*/
+
+a.animated-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;       /* distância abaixo do texto */
+    width: 0;           /* começa invisível */
+    height: 2px;        /* espessura da linha */
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+a.animated-link:hover::after {
+    width: 100%;
+}
+
+a.active::after {
+    width: 100%;
+}
+
+.content-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    margin-top: clamp(16px, 4vw, 48px);
+    margin-inline: clamp(16px, 3vw, 64px);
+    align-items: start;
+    }
+
+aside {
+    background-color: var(--surface-card);
+    border-radius: 30px;
+    border: dashed 2px rgba(var(--background-ligth-rgb), 0.4);
+}
+
+.categories-list {
+    list-style: none;
+    padding: 1rem;
+}
+
+.find-your-books{
+    padding: 1rem;
+    border-bottom: dashed 2px rgba(var(--background-ligth-rgb), 0.4);;
+}
+
+
+section {
+padding-left: 1.4rem;
+}
+
+.bookshelf{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    gap: 24px;
+    padding-top: 24px;
+}
+
+.category-link {
+    display: grid;
+    grid-template-columns: 20px auto; 
+    align-items: center;               
+    gap: 8px;                          
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.category-icon {
+    height: 25px;
+    width: 25px;
+}
+
+article {
+    display: grid;
+    gap: 2px;
+    background-color: var(--surface-card);
+    border: 2px dashed rgba(var(--background-ligth-rgb), 0.4);
+    border-radius: 30px;
+    padding: 0.7rem;
+}
+
+.book-cover{
+    height:240px;
+    width: 100%;
+    object-fit: contain;
+    display:block;
+    margin: auto;
+    padding-top: 1rem;
+    padding-bottom: 0.4rem; 
+}
+
+article figure {  
+    width: 95%;
+    margin: 0;
+    justify-self: center;
+}
+
+.publisher{
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+}
+
+.stars { 
+    color: var(--primary);
+    opacity: 90%;
+}
+
+article a {
+    font-size: 0.85rem;
+} 
+
+footer{
+    margin-top: 1rem;
+    padding:1rem;
+    background-color: var(--background);
+    text-align: center;
+}
+
+footer p{
+    color: var(--surface-card);
+    font-size: 1.2rem;
+    padding: 0.8rem;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.footer-link{
+    font-size: 0.8rem;
+    color: var(--surface-card);
+
+}
+
+.division { 
+    font-size: 0.8rem;
+    color: var(--surface-card);
+
+}
+
+/*form*/
+
+.form{
+    background-color: var(--surface-card);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 30px;
+    margin-inline: clamp(16px, 3vw, 64px);
+}
+
+input, select, textarea{
+    background-color: var(--surface);
+}
+
+label{
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    padding:1rem;
+}
+
+.form-title{
+    margin: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.status{
+    margin-left: 1rem;
+    font-size: var(--text-base);
+}
+
+.dashed-line{
+    border-bottom: 2px dashed rgba(var(--background-ligth-rgb), 0.3);
+}
+
+input[type="submit"]{
+    background-color: var(--primary);
+    color: var(--surface);
+    border-radius: 25px;
+    padding: 0.3rem;
+    border: none;
+    
+}
