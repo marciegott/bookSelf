@@ -15,6 +15,7 @@ function addNewBook() {
         const bookTitle = document.querySelector("#book-title").value;
         const bookGenre = document.querySelector("#book-genre").value;
         const bookAuthor = document.querySelector("#book-author").value;
+        const bookPublisher = document.querySelector("#book-publisher").value;
         const bookPages = document.querySelector("#book-pages").value;
         const bookStatus = document.querySelector("input[name='status']:checked").value;
         const bookReview = document.querySelector("#book-review").value;
@@ -25,6 +26,7 @@ function addNewBook() {
             title: bookTitle,
             genre: bookGenre,
             author: bookAuthor,
+            publisher: bookPublisher,
             pages: bookPages,
             status: bookStatus,
             review: bookReview,
@@ -38,10 +40,45 @@ function addNewBook() {
     });
 }
 
+//rendering the bookshelf 
+
+function renderBooks() {
+    const books = localStorage.getItem("books");
+    const booksArray = JSON.parse(books);
+    const bookshelf = document.querySelector(".bookshelf");
+
+    if (booksArray === null || booksArray.length === 0) {
+        bookshelf.innerHTML = `<article><p>Your bookSELF is still empty. <a href="add-new-book.html">Add your first book</a> and make this space your own.</p></article>`
+        return;
+    }
+    bookshelf.innerHTML = "";
+
+    booksArray.forEach(book => {
+
+        bookshelf.innerHTML += `
+    <article>
+    <figure>
+    <a href="#">
+    <img class="book-cover" src="./img/${book.cover}" alt="book cover of ${book.title}">
+    </a>
+    </figure>
+    <h3>${book.title}</h3>
+    <p>${book.author}</p>
+    <span class="book-details">${book.publisher}, ${book.pages} p.</span>
+    <span class="stars"></span>
+    <a href="#">${book.genre}</a>
+    <a href="#">Edit</a>
+    <a href="#">Book details</a>
+    </article>`
+    });
+}
+
+
 
 
 function init() {
     addNewBook();
+    renderBooks();
 }
 
 init();
