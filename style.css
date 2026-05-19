@@ -303,6 +303,8 @@ label{
 .status{
     margin-left: 1rem;
     font-size: var(--text-base);
+    margin-top: 50px;
+    margin-bottom: 12px; 
 }
 
 .dashed-line{
@@ -315,5 +317,33 @@ input[type="submit"]{
     border-radius: 25px;
     padding: 0.3rem;
     border: none;
-    
+}
+
+.form-row {
+  margin-bottom: 12px /* ou quantos tu achar que fica bom */
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+#book-search {
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+#search-button {
+    background-color: var(--surface-card);
+}
+
+#search-button:hover {
+    font-size: 14px; 
+    cursor: pointer;
+    transition: font-size 0.2s ease-in-out;
 }
