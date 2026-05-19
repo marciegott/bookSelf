@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--part that the browser doesn't displays-->
+    <meta charset="UTF-8" />
+    <!--linking the css-->
+    <link href="style.css" rel="stylesheet" />
+    <script src="search.js" defer></script>
+    <title>My bookSelf</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="menu-container">
+                <nav>
+                    <a href="index.html">
+                        <img src="img/logo.png" class="logo" alt="BookSelf logo" />
+                    </a>
+                    <div class="menu-div">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a class="animated-link" href="index.html">My bookshelf</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="animated-link" href="add-new-book-.html">Add a new book</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="animated-link" href="about.html">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="form search-container">
+                <form id="search-form">
+                    <label for="search">Search:</label>
+                    <input type="text" id="book-search" name="search" placeholder="for author or book" required />
+                    <input type="submit" id="search-button" value="🔍" />
+                </form>
+                <section class="search-results">
+                    <!-- The books from the API will be displayed here -->
+                </section>
+
+            </div>
+    </div>
+
+</body>
+
+</html>
