@@ -1,5 +1,8 @@
 import express from "express";
+import Database from "better-sqlite3"; //importando o driver? 
 
+// Conectando no arquivo estante.db (ele será criado se não existir)
+const db = new Database('bookshelf.db'); 
 const app = express();
 const PORT = 3000;
 
@@ -10,18 +13,96 @@ app.get("/", (req, res) => {
     res.send("Servidor da Minha Estante Virtual funcionando! 📚");
 });
 
-//populando os livros para poder criar as primeiras rotas
-let books = [
-    { id: 1, title: "Beach Read", author: "Emily Henry", pages: 361, read: false, genre: "romance" },
-    { id: 2, title: "People We Meet on Vacation", author: "Emily Henry", pages: 384, read: true, genre: "romance" },
-    { id: 3, title: "Book Lovers", author: "Emily Henry", pages: 400, read: false, genre: "romance" },
-];
-let nextId = 4;
+//select all books
+app.get('/books', (req, res) => {
+    const books = db.prepare('SELECT * FROM books').all();
+    res.json(books);
+});
 
-function getBookIndexById(id) {
-    const numberId = Number(id);
-    return books.findIndex((l)=>(l.id===numberId));
-}
+//selecting book by id
+app.get('/books/:id', (req, res) => {
+    const id = req.params.id;
+    const book = db.prepare('SELECT * FROM books WHERE id = ?').get(id);
+
+    if(!book) {
+        return res.status(404).json({message: "Hmm, it looks like this book isn't on your shelf yet"});
+    }
+
+    res.json(book);
+});
+
+//creating new book
+app.post('/books', (req, res)=> {
+    const {title, author, pages, read, genre} = req.body;
+
+    if (!title || !author)
+    {
+        return res.status(400).json({error: "Title and author are required to add a new book"});
+    }
+
+    const info = db.prepare('INSERT INTO books (title, author, pages, read, genre) VALUES (?, ?, ?, ?, ?)')
+        .run(title, author, pages || null, read ? 1 : 0 , genre || null);
+        
+        res.status(201).json({
+            id: info.lastInsertRowid, 
+            mensagem: "Book created!"
+        }); 
+});
+
+//updating a book
+
+app.patch("/books/:id", (req, res) => {
+    const id = req.params.id;
+    const updates = req.body;
+
+    //turning the boolean read/unread into integer 
+    if (updates.read !== undefined) {
+        updates.read = updates.read ? 1 : 0;
+    }
+
+    //Preparing the data
+    const allowedFields = ['title', 'author', 'pages', 'read', 'genre'];
+    const fields = Object.keys(updates).filter(field => allowedFields.includes(field));
+    const values = fields.map(field => updates[field]);
+
+//Creating the SQL for what needs to change
+    const queryFields = fields.map(field => `${field} = ?`).join(", ");
+    
+    try{
+        const info = db.prepare(`UPDATE books SET ${queryFields} WHERE id = ?`).run(...values, id);    
+        //o ... separa o array como argumentos separados
+
+        if (info.changes === 0) {
+            return res.status(404).json({ 
+                error: "Book not found",
+                message: "We couldn't find a book with this ID to update." 
+            });
+        }
+
+        res.status(200).json({ message: "Book updated successfully!" });
+    }
+    
+    catch (error) {
+    res.status(500).json({ error: "Failed to update the book"});    }
+});
+
+//delete books by ID
+app.delete("/books/:id", (req, res) =>{
+    const id = req.params.id;
+    
+    try{
+    const info = db.prepare('DELETE FROM books WHERE id = ?').run(id);
+    
+    if (info.changes === 0) {
+            return res.status(404).json({ error: "Book not found" });
+        }
+    res.status(204).send();
+    } catch (error) {
+        res.status(500).json({error: "Failed to delete the book"});
+    }
+});
+
+/*
 
 // get all the books, filters: read, unread, author and genre
 app.get ("/books", (req, res) => {
@@ -65,40 +146,6 @@ app.get("/books/stats", (req,res) => {
         readPages
     })
 });
-
-
-// get the book by the ID, if can't find, return 404
-app.get("/books/:id", (req, res)=>{
-    const id = Number(req.params.id); //converting the ID from string to Number
-    const book = books.find((l)=>l.id===id);
-    if (!book){
-        return res.status(404).json({error: "Book not found"});
-    }
-    res.json(book);
-});
-
-//post new books, title and author are required - return 400 if it's missing
-app.post("/books", (req, res)=> {
-    const {title, author, pages, read, genre} = req.body;
-
-    if (!title || !author)
-    {
-        return res.status(400).json({error: "Title and author are required to add a new book"});
-    }
-
-    //creating the new book
-    const newBook = {
-        id: nextId++,
-        title, 
-        author, 
-        pages: pages || null,
-        read: read || false
-    };
-
-    books.push(newBook);
-    res.status(201).json(newBook);
-});
-
 //update book infos
 app.patch("/books/:id", (req, res) => {
     const index = getBookIndexById(req.params.id);
@@ -109,18 +156,7 @@ app.patch("/books/:id", (req, res) => {
     res.json(books[index]);
 });
 
-//delete books by ID, return 204 in case of success, 404 if it doesn't find the book
-app.delete("/books/:id", (req, res) =>{
-    const index = getBookIndexById(req.params.id);
-    if (index === -1) {
-    return res.status(404).json({error:"Book not found"});
-    }
-    books.splice(index, 1);
-    res.status(204).send();
-});
-
-//stats
-
+*/
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
